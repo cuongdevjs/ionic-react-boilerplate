@@ -1,0 +1,7 @@
+{
+  "name": "yooloveApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
