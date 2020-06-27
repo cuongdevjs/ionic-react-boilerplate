@@ -1,0 +1,42 @@
+/**
+*
+* {{ properCase ComponentName }}
+*
+*/
+{{#if wantMemo}}
+import React, { memo } from 'react';
+{{else}}
+import React from 'react';
+{{/if}}
+{{#if wantStyledComponents}}
+import { {{ properCase ComponentName }}Wrapper } from './styled';
+{{/if}}
+
+interface Props {}
+
+{{#if wantMemo}}
+export const {{ properCase ComponentName }} = memo((props: Props) => {
+{{else}}
+export function {{ properCase ComponentName }}(props: Props) {
+{{/if}}
+  return (
+  {{#if wantStyledComponents}}
+  <{{properCase ComponentName}}Wrapper>
+  {{else}}
+  <div>
+  {{/if}}
+    {{#if wantTranslations}}
+    {t('')}
+    {{/if}}
+  {{#if wantStyledComponents}}
+  </{{properCase ComponentName}}Wrapper>
+  {{else}}
+  </div>
+  {{/if}}
+  );
+
+{{#if wantMemo}}
+});
+{{else}}
+};
+{{/if}}

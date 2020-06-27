@@ -1,7 +1,5 @@
 import { AppState } from "pages/App/types";
-
-
-
+// [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 /*
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
   You have to declare them here manually
@@ -9,6 +7,6 @@ import { AppState } from "pages/App/types";
   So, not available always
 */
 export interface RootState {
+  app?: AppState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
-  app: AppState
 }
