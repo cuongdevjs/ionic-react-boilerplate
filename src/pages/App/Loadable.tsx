@@ -8,7 +8,7 @@ import { lazyLoad } from 'utils/loadable';
 
 const App = lazyLoad(
   () => import('./index'),
-  module => module.MainApp,
+  module => module.App,
 );
 
 export default App

@@ -1,5 +1,6 @@
 export interface AppState {
-  loading: boolean
+  loading: boolean;
+  isLogged: boolean;
 }
 
 

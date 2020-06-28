@@ -5,7 +5,8 @@ import { ContainerState } from './types';
 
 // The initial state of the App container
 export const initialState: ContainerState = {
-  loading: false
+  loading: false,
+  isLogged: false,
 };
 
 
@@ -15,6 +16,9 @@ const appSlice = createSlice({
   reducers: {
     changeLoading: (state, action: PayloadAction<{stateLoading: boolean}> ) => {
       state.loading = action.payload.stateLoading;
+    },
+    changeIsLogged: (state, action: PayloadAction<{stateLogged: boolean}>) => {
+      state.isLogged = action.payload.stateLogged;
     }
   },
   // extraReducers: {

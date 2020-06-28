@@ -16,6 +16,25 @@ export function* watchAndLog() {
   }
 }
 
+
+// function* watchIsLogged() {
+//   while (true) {
+//     yield take(loginAction.SUCCESS);
+//     yield put(actions.changeIsLogged(true));
+//   }
+// }
+
+// export function* getMeSaga() {
+//   try {
+//     const response = yield call($get, '/getMe');
+//     yield put(getMe.success(response.data));
+//   } catch {
+//     yield put(getMe.failure());
+//   }
+// }
+
 export function* appSaga() {
   if (process.env.NODE_ENV === 'development') yield fork(watchAndLog);
+  // yield fork(watchIsLogged);
+  // yield takeLatest(getMe.TRIGGER, getMeSaga);
 }

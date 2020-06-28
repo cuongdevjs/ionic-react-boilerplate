@@ -1,33 +1,36 @@
-import React from "react";
-import {
-  IonPage,
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonButtons,
-  IonBackButton,
-  IonTitle,
-} from "@ionic/react";
+/**
+ *
+ * Login
+ *
+ */
+
+import React, { memo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { useInjectReducer, useInjectSaga } from "utils/redux-injectors";
+import { reducer, sliceKey } from "./slice";
+import { selectLogin } from "./selectors";
+import { loginSaga } from "./saga";
+import { LoginWrapper } from "./styled";
+import { IonPage, IonFabButton } from "@ionic/react";
 
 interface Props {}
 
-const LoginPage: React.FC<Props> = (props: Props) => {
+export const Login = memo((props: Props) => {
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: loginSaga });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const login = useSelector(selectLogin);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const dispatch = useDispatch();
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
-          </IonButtons>
-          <IonTitle>My Navigation Bar</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent>
-        <div>Nguyen manh cuong</div>
-      </IonContent>
+      <LoginWrapper>
+        <span>login</span>
+        <IonFabButton color="primary">Primary</IonFabButton>
+      </LoginWrapper>
     </IonPage>
   );
-};
-
-export default LoginPage;
+});

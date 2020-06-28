@@ -1,4 +1,6 @@
 import { AppState } from "pages/App/types";
+import { HomeState } from 'pages/Home/types';
+import { LoginState } from 'pages/Login/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 /*
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
@@ -8,5 +10,7 @@ import { AppState } from "pages/App/types";
 */
 export interface RootState {
   app?: AppState;
+  home?: HomeState;
+  login?: LoginState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
