@@ -5,9 +5,10 @@ import axios, {
   AxiosPromise,
 } from "axios";
 import { getItem, clearAll } from "utils/lsStorage";
-// import { store } from 'App';
+import { store } from "../index";
 // import { logout } from 'store/actions/actionAuth';
 import Qs from "qs";
+import { actions as ActionApp } from "pages/App/slice";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -23,9 +24,9 @@ const _axios: AxiosInstance = axios.create(config);
 _axios.interceptors.request.use(
   async function(config) {
     // Do something before request
-    const token = await getItem("meeting-token");
+    const token = await getItem("yoolove-token");
     if (token) {
-      config.headers["api-token"] = `${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     config.paramsSerializer = (params: any) => {
       return Qs.stringify(params, {
@@ -45,13 +46,24 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   function(response: AxiosResponse) {
+    store.dispatch(
+      ActionApp.showToast({
+        messageToast: response.data.message,
+        colorToast: response.data.statusCode === 200 ? "success" : "warning",
+      })
+    );
     // Do something with response data
     return response;
   },
   (error) => {
     if (error.response && error.response.status) {
       if (error.response.status !== 200) {
-        console.log(error.response.data);
+        store.dispatch(
+          ActionApp.showToast({
+            messageToast: error.response.data.message,
+            colorToast: "danger",
+          })
+        );
 
         if (error.response.status === 401) {
           clearAll();

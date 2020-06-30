@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { configureAppStore } from "store/configStore";
 import { Provider } from "react-redux";
 import "./utils/axios";
-const store = configureAppStore();
+export const store = configureAppStore();
 
 interface Props {
   Component: typeof App;

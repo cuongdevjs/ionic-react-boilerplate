@@ -3,7 +3,8 @@ import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
 const getItem = async (key: string) => {
-  return await Storage.get({ key });
+  const { value } = await Storage.get({ key });
+  return value;
 };
 
 const setItem = async (key: string, value: string) => {
