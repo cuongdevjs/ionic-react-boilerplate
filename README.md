@@ -1,6 +1,11 @@
-# Ionic-react-boilerplate
+# Ionic-react-boilerplate (typescript)
 * Ionic Base Project use Redux, Redux-Toolkit, Redux-Saga, Redux-injectors
 * Allow generator components/containers template by using cmd
+* Structure folder component & container (view & logic)
+* Optimize redux by using ReduxToolkit
+* Use styled-component
+* Based on structure of [React Boilerplate repository](https://github.com/react-boilerplate/react-boilerplate-cra-template)
+
 
 ***
 
