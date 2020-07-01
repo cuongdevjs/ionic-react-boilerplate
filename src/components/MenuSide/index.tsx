@@ -25,12 +25,19 @@ export const MenuSide = memo((props: Props) => {
     menuController.enable(true);
   }, []);
 
+  const _onNavigation = React.useCallback(
+    (url: string) => {
+      menuController.close();
+      history.replace(url);
+    },
+    [history]
+  );
+
   const _onLogout = React.useCallback(() => {
-    menuController.close();
     const logout = props.logout;
     logout();
-    history.push("/login");
-  }, [history, props.logout]);
+    _onNavigation("/login");
+  }, [_onNavigation, props.logout]);
 
   return (
     <MenuSideWrapper>
@@ -40,7 +47,11 @@ export const MenuSide = memo((props: Props) => {
         className="my-custom-menu"
         // type="overlay"
       >
-        <Header isLogged={props.isLogged} infoMySelf={props.infoMySelf} />
+        <Header
+          isLogged={props.isLogged}
+          infoMySelf={props.infoMySelf}
+          onToProfilePage={() => _onNavigation("/profile")}
+        />
         <MenuContent>
           {/* <IonContent id="content"> */}
           <IonList>
@@ -48,8 +59,8 @@ export const MenuSide = memo((props: Props) => {
               <MenuItem
                 key={item.label + item.href}
                 label={item.label}
-                href={item.href}
                 icon={item.icon}
+                onClick={() => _onNavigation(item.href)}
               />
             ))}
           </IonList>

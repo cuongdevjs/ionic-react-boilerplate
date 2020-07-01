@@ -15,10 +15,11 @@ import { selectLoading } from "./selectors";
 import { Header, Footer, Main } from "./components";
 
 import bgUrl from "assets/images/bgRegister.png";
+import { RouteComponentProps } from "react-router";
 
-interface Props {}
+interface Props extends RouteComponentProps {}
 
-export const Login = memo((props: Props) => {
+export const Login: React.FC<Props> = memo(({ history }) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: loginSaga });
 
@@ -42,6 +43,10 @@ export const Login = memo((props: Props) => {
     []
   );
 
+  const onGoRegisterPage = React.useCallback(() => history.push("/register"), [
+    history,
+  ]);
+
   return (
     <IonPage>
       <Header bgUrl={bgUrl} />
@@ -53,7 +58,7 @@ export const Login = memo((props: Props) => {
         onChangePassword={onChangePassword}
         onSubmit={onSubmit}
       />
-      <Footer />
+      <Footer onGoRegisterPage={onGoRegisterPage} />
     </IonPage>
   );
 });

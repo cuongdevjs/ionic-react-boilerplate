@@ -3,18 +3,18 @@ import React from "react";
 import { LoginActionOption, LoginFooter } from "../styled";
 import { IonGrid, IonRow, IonCol, IonIcon } from "@ionic/react";
 import { chevronBackOutline } from "ionicons/icons";
-import { useHistory } from "react-router";
 
-interface Props {}
+interface Props {
+  onGoRegisterPage: () => void;
+}
 
-export const Footer: React.FC<Props> =  () => {
-  const history = useHistory();
+export const Footer: React.FC<Props> = ({ onGoRegisterPage }) => {
   return (
     <LoginFooter>
       <IonGrid>
         <IonRow>
           <IonCol className="ion-text-start">
-            <LoginActionOption onClick={() => history.push("/register")}>
+            <LoginActionOption onClick={onGoRegisterPage}>
               <span className="icon">
                 <IonIcon icon={chevronBackOutline} slot="start" />
               </span>

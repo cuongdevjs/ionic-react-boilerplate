@@ -7,12 +7,13 @@ import {
 import { MenuHeader, MenuHeaderAvatar } from "../styled";
 import { I_InfoMySelf } from "pages/App/types";
 
-interface Props {
+interface Props  {
   isLogged: boolean;
   infoMySelf: I_InfoMySelf;
+  onToProfilePage: () => void;
 }
 
-export const Header = ({ isLogged, infoMySelf }: Props) => {
+export const Header: React.FC<Props> = ({  isLogged, infoMySelf, onToProfilePage }: Props) => {
   return (
     <IonHeader>
       <MenuHeader>
@@ -41,7 +42,7 @@ export const Header = ({ isLogged, infoMySelf }: Props) => {
               <div className="logged">
                 <div className="username">{ infoMySelf.username }</div>
                 <div className="mail">{ infoMySelf.email }</div>
-                <div className="linkTargetProfile">
+                <div className="linkTargetProfile" onClick={onToProfilePage}>
                   <IonIcon icon={eyedropSharp} />
                   <span>Quan ly tai khoan</span>
                 </div>
