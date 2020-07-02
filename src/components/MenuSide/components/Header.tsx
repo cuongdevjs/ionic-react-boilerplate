@@ -11,9 +11,10 @@ interface Props  {
   isLogged: boolean;
   infoMySelf: I_InfoMySelf;
   onToProfilePage: () => void;
+  onToLoginPage: () => void;
 }
 
-export const Header: React.FC<Props> = ({  isLogged, infoMySelf, onToProfilePage }: Props) => {
+export const Header: React.FC<Props> = ({  isLogged, infoMySelf, onToProfilePage, onToLoginPage }: Props) => {
   return (
     <IonHeader>
       <MenuHeader>
@@ -34,6 +35,7 @@ export const Header: React.FC<Props> = ({  isLogged, infoMySelf, onToProfilePage
                   size="default"
                   expand="block"
                   className="btnTargetLogin"
+                  onClick={onToLoginPage}
                 >
                   Đăng nhập
                 </IonButton>

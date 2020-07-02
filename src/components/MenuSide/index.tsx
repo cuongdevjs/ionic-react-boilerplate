@@ -28,7 +28,7 @@ export const MenuSide = memo((props: Props) => {
   const _onNavigation = React.useCallback(
     (url: string) => {
       menuController.close();
-      history.replace(url);
+      history.push(url);
     },
     [history]
   );
@@ -51,6 +51,7 @@ export const MenuSide = memo((props: Props) => {
           isLogged={props.isLogged}
           infoMySelf={props.infoMySelf}
           onToProfilePage={() => _onNavigation("/profile")}
+          onToLoginPage={() => _onNavigation("/login")}
         />
         <MenuContent>
           {/* <IonContent id="content"> */}
