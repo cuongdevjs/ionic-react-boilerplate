@@ -5,7 +5,20 @@ import * as serviceWorker from "./serviceWorker";
 import { configureAppStore } from "store/configStore";
 import { Provider } from "react-redux";
 import "./utils/axios";
+
+import { setupConfig } from "@ionic/react";
+import { defineCustomElements } from "@ionic/pwa-elements/loader";
+
 export const store = configureAppStore();
+
+setupConfig({
+  // animated: false,
+  swipeBackEnabled: false,
+  statusTap: true
+});
+
+defineCustomElements(window);
+
 
 interface Props {
   Component: typeof App;

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from 'styled-components';
+import styled, { createGlobalStyle, css } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -28,6 +28,12 @@ export const GlobalStyle = createGlobalStyle`
   }
   .cursorPointer {
     cursor: pointer !important;
+  }
+  ion-picker {
+    --ion-color-primary: #414141;
+    .picker-opt {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -88,7 +94,7 @@ export const FlexColBetween = css`
 `;
 
 export const BackgroundCover = css<{ bgUrl: string | null | undefined }>`
-  background-image: url(${props => props.bgUrl && props.bgUrl});
+  background-image: url(${(props) => props.bgUrl && props.bgUrl});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

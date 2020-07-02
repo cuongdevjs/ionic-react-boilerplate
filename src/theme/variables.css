@@ -4,6 +4,7 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   --ion-font-family: 'Inter',sans-serif !important;
+  --ion-default-font: 'Inter',sans-serif !important;
   /** primary **/
   --ion-color-primary: #f6f6f6;
   --ion-color-primary-rgb: 56, 128, 255;
