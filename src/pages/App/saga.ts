@@ -30,7 +30,6 @@ export function* getMeSaga() {
   yield put(GET_INFO_MYSELF.request());
   try {
     const response = yield call($get, "/wp/v2/user/me");
-    console.log(response);
     yield put(GET_INFO_MYSELF.success({ info: response.data.data }));
   } catch {
     yield put(GET_INFO_MYSELF.failure());

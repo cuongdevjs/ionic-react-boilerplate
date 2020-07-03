@@ -26,10 +26,10 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    changeLoading: (state, action: PayloadAction<{stateLoading: boolean}> ) => {
+    changeLoading: (state, action: PayloadAction<{ stateLoading: boolean }>) => {
       state.loading = action.payload.stateLoading;
     },
-    changeIsLogged: (state, action: PayloadAction<{stateLogged: boolean}>) => {
+    changeIsLogged: (state, action: PayloadAction<{ stateLogged: boolean }>) => {
       state.isLogged = action.payload.stateLogged;
     },
     showToast: (state, action: PayloadAction<PayloadToast>) => {
@@ -46,9 +46,12 @@ const appSlice = createSlice({
       state.durationToast = initialState.durationToast
       state.colorToast = initialState.colorToast;
       state.positionToast = initialState.positionToast;
-      state.translucentToast = initialState.translucentToast ;
+      state.translucentToast = initialState.translucentToast;
       state.headerToast = initialState.headerToast;
       state.isShowToast = false;
+    },
+    updateInfoMySelf: (state, action: PayloadAction<I_InfoMySelf>) => {
+      state.infoMySelf = { ...state.infoMySelf, ...action.payload }
     },
     logout: (state) => {
       state.loading = initialState.loading;
@@ -58,11 +61,11 @@ const appSlice = createSlice({
     }
   },
   extraReducers: {
-    [GET_INFO_MYSELF.TRIGGER]: (state, action: PayloadAction<any>) => {},
+    [GET_INFO_MYSELF.TRIGGER]: (state, action: PayloadAction<any>) => { },
     [GET_INFO_MYSELF.REQUEST]: (state, action: PayloadAction<any>) => {
       state.loading = true;
     },
-    [GET_INFO_MYSELF.SUCCESS]: (state, action: PayloadAction<{info: I_InfoMySelf}>) => {
+    [GET_INFO_MYSELF.SUCCESS]: (state, action: PayloadAction<{ info: I_InfoMySelf }>) => {
       state.infoMySelf = action.payload.info;
       state.loading = false;
     },
