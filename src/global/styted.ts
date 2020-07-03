@@ -35,6 +35,13 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 18px;
     }
   }
+  ion-card, ion-item, ion-menu {
+    --ion-item-background: #fff;
+    --background: #fff;
+  }
+  ion-header {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.05);
+  }
 `;
 
 export const Flex = css`
