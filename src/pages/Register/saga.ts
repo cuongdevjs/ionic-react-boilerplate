@@ -6,7 +6,6 @@ export function* registerSagas({ payload }) {
   yield put(REGISTER_ACTION.request());
   try {
     const result = yield call($post, "/wp/v2/users/register", payload);
-    console.log(result);
     if (result.data.statusCode === 200) {
       yield put(REGISTER_ACTION.success());
     } else yield put(REGISTER_ACTION.failure());
