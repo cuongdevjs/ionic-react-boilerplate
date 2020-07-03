@@ -16,7 +16,6 @@ import { reducer, sliceKey, UPDATE_INFO_MY_SELF_ACTION } from "./slice";
 import { profileSaga } from "./saga";
 
 import {
-  ProfileWrapper,
   ProfileContent,
   ProfileContentGroups,
 } from "./styled";
@@ -58,26 +57,53 @@ export const Profile: React.FC<Props> = memo(({ history }) => {
 
   const _onChangeBirthday = React.useCallback(e => setBirthday(e.detail.value), []);
 
-  const _onSubmitAvatar = React.useCallback(avatar => dispatch(UPDATE_INFO_MY_SELF_ACTION({ avatar })), [dispatch])
+  const _onSubmitAvatar = React.useCallback(avatar =>
+    dispatch(UPDATE_INFO_MY_SELF_ACTION({ avatar })),
+  [ dispatch ]);
 
   const _onSubmit = React.useCallback(() => {
-    dispatch(UPDATE_INFO_MY_SELF_ACTION({ last_name: lastName, first_name: firstName, phone, address, birthday }))
-  }, [address, birthday, dispatch, firstName, lastName, phone])
+    dispatch(UPDATE_INFO_MY_SELF_ACTION({
+      last_name: lastName,
+      first_name: firstName,
+      phone,
+      address,
+      birthday
+    }))
+  }, [
+    address,
+    birthday,
+    dispatch,
+    firstName,
+    lastName,
+    phone
+  ])
 
   return (
     <IonPage>
-      <ProfileWrapper>
-        <Header />
-        <IonContent fullscreen={true} forceOverscroll={true}>
-          <ProfileContent>
-            <SegmentAvatar infoMySelf={infoMySelf} onSubmitAvatar={_onSubmitAvatar} />
-            <ProfileContentGroups>
-              <SegmentInfoDisplay infoMySelf={infoMySelf} />
-              <SegmentInfoEditable loading={loading} infoMySelf={infoMySelf} firstName={firstName} lastName={lastName} phone={phone} address={address} birthday={birthday} _onChangeAddress={_onChangeAddress} _onChangeBirthday={_onChangeBirthday} _onChangeFirstName={_onChangeFirstName} _onChangeLastName={_onChangeLastName} _onChangePhone={_onChangePhone} _onSubmit={_onSubmit} />
-            </ProfileContentGroups>
-          </ProfileContent>
-        </IonContent>
-      </ProfileWrapper>
+      <Header />
+      <IonContent fullscreen={true} forceOverscroll={true}>
+        <ProfileContent>
+          <SegmentAvatar infoMySelf={infoMySelf} onSubmitAvatar={_onSubmitAvatar} />
+          <ProfileContentGroups>
+            <SegmentInfoDisplay infoMySelf={infoMySelf} />
+            <SegmentInfoEditable
+              loading={loading}
+              infoMySelf={infoMySelf}
+              firstName={firstName}
+              lastName={lastName}
+              phone={phone}
+              address={address}
+              birthday={birthday}
+              _onChangeAddress={_onChangeAddress}
+              _onChangeBirthday={_onChangeBirthday}
+              _onChangeFirstName={_onChangeFirstName}
+              _onChangeLastName={_onChangeLastName}
+              _onChangePhone={_onChangePhone}
+              _onSubmit={_onSubmit}
+            />
+          </ProfileContentGroups>
+        </ProfileContent>
+      </IonContent>
     </IonPage>
   );
 });

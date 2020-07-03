@@ -6,10 +6,8 @@
 import styled from "styled-components";
 import { FlexRowCenter } from "global/styted";
 
-export const ProfileWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  ion-header {
+
+export const ProfileHeader = styled.div`
     ion-toolbar {
       --padding-start: 16px;
       --padding-end: 16px;
@@ -32,10 +30,7 @@ export const ProfileWrapper = styled.div`
         }
       }
     }
-  }
 `;
-
-export const ProfileHeader = styled.div``;
 
 export const ProfileContent = styled.div`
   width: 100%;
@@ -71,7 +66,6 @@ export const ProfileContentAvt = styled.div`
 
 export const ProfileContentGroups = styled.div`
   padding: 0 20px 24px;
-  margin-bottom: 24px;
 `;
 
 export const ProfileContentGroupItem = styled.div`
