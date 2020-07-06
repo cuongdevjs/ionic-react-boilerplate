@@ -42,6 +42,9 @@ export const GlobalStyle = createGlobalStyle`
   ion-header {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.05);
   }
+  ion-refresher.refresher-active {
+    z-index: 10;
+  }
 `;
 
 export const Flex = css`

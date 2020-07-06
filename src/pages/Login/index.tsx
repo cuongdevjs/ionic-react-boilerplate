@@ -30,8 +30,8 @@ export const Login: React.FC<Props> = memo(({ history }) => {
 
   const onSubmit = React.useCallback(
     (e) => {
-      e.preventDefault();
       dispatch(LOGIN_ACTION({ username: _email, password: _password }));
+      e.preventDefault();
     },
     [_email, _password, dispatch]
   );

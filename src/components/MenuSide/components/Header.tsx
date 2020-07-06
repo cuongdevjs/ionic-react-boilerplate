@@ -42,11 +42,11 @@ export const Header: React.FC<Props> = ({  isLogged, infoMySelf, onToProfilePage
               </div>
             ) : (
               <div className="logged">
-                <div className="username">{ infoMySelf.username }</div>
-                <div className="mail">{ infoMySelf.email }</div>
+                <div className="username">{ infoMySelf?.username || "---" }</div>
+                <div className="mail">{ infoMySelf?.email || "---" }</div>
                 <div className="linkTargetProfile" onClick={onToProfilePage}>
                   <IonIcon icon={eyedropSharp} />
-                  <span>Quan ly tai khoan</span>
+                  <span>Quản lý tài khoản </span>
                 </div>
               </div>
             )}

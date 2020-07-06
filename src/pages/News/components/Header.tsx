@@ -5,27 +5,22 @@ import {
   IonButtons,
   IonMenuButton,
   IonTitle,
-  IonIcon,
 } from "@ionic/react";
-import { eyedropOutline } from "ionicons/icons";
-import { ProfileHeader } from "../styled";
+import { NewsHeader } from "../styled";
 
 interface Props {}
 
 export const Header = React.memo((props: Props) => {
   return (
     <IonHeader>
-      <ProfileHeader>
+      <NewsHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle class="ion-text-center">Hồ sơ</IonTitle>
-          <IonButtons slot="end">
-            <IonIcon icon={eyedropOutline} />
-          </IonButtons>
+          <IonTitle class="ion-text-center">Tin tức</IonTitle>
         </IonToolbar>
-      </ProfileHeader>
+      </NewsHeader>
     </IonHeader>
   );
 });
