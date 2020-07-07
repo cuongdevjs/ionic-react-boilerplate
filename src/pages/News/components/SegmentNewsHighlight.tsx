@@ -6,34 +6,54 @@ import {
   IonCardTitle,
   IonCardContent,
   IonIcon,
+  IonSkeletonText,
 } from "@ionic/react";
 import bgUrl from "assets/images/bgProfile.png";
 import { timeOutline } from "ionicons/icons";
+import { I_News } from "../types";
+import { $get } from "utils/axios";
+import { formatTime } from "utils/functionHelper";
 
-interface Props {}
+interface Props {
+  news: I_News;
+  onSelectedNews: (news: I_News) => void;
+}
 
-export const SegmentNewsHighlight = React.memo((props: Props) => {
+export const SegmentNewsHighlight = React.memo(({ news, onSelectedNews }: Props) => {
+  const [avt, setAvt] = React.useState("");
+
+  const getAvt = React.useCallback(async () => {
+    try {
+      const data = await $get(`/wp/v2/media/${news?.featured_media || 0}`);
+      setAvt(data?.data?.source_url || bgUrl)
+    } catch {
+      setAvt(bgUrl)
+    }
+  }, [news])
+
+  React.useEffect(() => {
+    getAvt()
+  }, [getAvt])
+
   return (
-    <NewsHighlight>
+    <NewsHighlight className="ion-react-nav-detail-btn" onClick={() => onSelectedNews(news)}>
       <IonCard>
-        <img src={bgUrl} alt="img" />
+        {avt ?
+          <img src={avt} alt="img" /> :
+          <IonSkeletonText style={{ height: '250px', width: '100%' }} animated />
+        }
         <IonCardHeader>
           <IonCardTitle>
-            Truyền hình Hà Giang: Khánh thành trường mầm non Khuổi Luồn cho trẻ
-            em vùng cao
+            {news?.title?.rendered}
           </IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
-          <span>
-            Ngày 19/5/2020, Quỹ từ thiện YooLove của công ty TNHH Công nghệ
-            Thông tin YooPay Việt Nam đã phối hợp cùng xã Hữu Sản, huyện Bắc
-            Quang tỉnh Hà Giang tổ chức lễ khánh thành điểm trường mầm non thôn
-            Khuổi Luồn.
+          <span dangerouslySetInnerHTML={{ __html: news?.excerpt?.rendered || "" }}>
           </span>
         </IonCardContent>
         <div className="time">
           <IonIcon icon={timeOutline} slot="start" />
-          <span>18/02/2019</span>
+          <span>&nbsp;{formatTime(news?.modified || new Date().toString())}</span>
         </div>
       </IonCard>
     </NewsHighlight>

@@ -8,15 +8,25 @@ import { IonNav } from "@ionic/react";
 
 interface IonReactNavProps {
   detail: Function;
+  data: any;
+  chidlren?: React.ReactNode;
 }
 
 export const IonReactNav: React.FC<IonReactNavProps> = ({
   children,
   detail,
+  data
 }) => {
-  const handleNavWillChange = async (navEl: HTMLIonNavElement) => {
+  const navElRef = React.useRef<HTMLIonNavElement>();
+
+  React.useEffect(() => {
+    navElRef?.current?.push("nav-detail");
+  }, [data]);
+
+  const onIonNavDidChange = async (navEl: HTMLIonNavElement) => {
+    navElRef.current = navEl;
     const rootView = await navEl.getByIndex(0);
-    console.log(rootView);
+    console.log(rootView)
 
     if (rootView === undefined) {
       const homeEl = navEl.querySelector("#home-wrapper") as HTMLDivElement;
@@ -43,21 +53,15 @@ export const IonReactNav: React.FC<IonReactNavProps> = ({
           }
         );
       }
-
-      navEl.querySelectorAll(".ion-react-nav-detail-btn").forEach((btn) => {
-        btn.addEventListener("click", function() {
-          navEl.push("nav-detail");
-        });
-      });
     }
   };
 
   return (
     <IonNav
-      onIonNavWillChange={(e) =>
-        handleNavWillChange(e.target as HTMLIonNavElement)
-      }
+      onIonNavWillChange={(e) => onIonNavDidChange(e.target as HTMLIonNavElement)}
       root="nav-home"
+      animated
+      swipeGesture
     >
       <div id="home-wrapper">{children}</div>
       <div id="detail-wrapper" style={{ display: "none" }}>

@@ -14,6 +14,7 @@ import {
   IonTitle,
   IonContent,
   IonIcon,
+  IonSkeletonText,
 } from "@ionic/react";
 import {
   NewsDetailHeader,
@@ -24,10 +25,34 @@ import {
 } from "./styled";
 import bgUrl from "assets/images/bgProfile.png";
 import { arrowBackOutline, timeOutline } from "ionicons/icons";
+import { I_News } from "pages/News/types";
+import { formatTime } from "utils/functionHelper";
+import { $get } from "utils/axios";
 
-interface Props {}
+interface Props {
+  news: I_News;
+}
 
-export const NewsDetail = memo((props: Props) => {
+export const NewsDetail = memo(({ news }: Props) => {
+  const [avt, setAvt] = React.useState("");
+
+  const getAvt = React.useCallback(async () => {
+    try {
+      const data = await $get(`/wp/v2/media/${news?.featured_media || 0}`);
+      console.log(data)
+      setAvt(data?.data?.source_url || bgUrl)
+    } catch {
+      setAvt(bgUrl)
+    }
+  }, [news])
+
+  React.useEffect(() => {
+    getAvt();
+    return () => {
+      setAvt("")
+    }
+  }, [getAvt, news])
+
   return (
     <>
       <IonHeader translucent>
@@ -37,7 +62,7 @@ export const NewsDetail = memo((props: Props) => {
               <IonBackButton
                 icon={arrowBackOutline}
                 text={""}
-                defaultHref="/home"
+                defaultHref="/news"
               />
             </IonButtons>
             <IonTitle>Chi tiết tin tức</IonTitle>
@@ -46,42 +71,21 @@ export const NewsDetail = memo((props: Props) => {
       </IonHeader>
       <IonContent fullscreen>
         <NewsDetailBg>
-          <img src={bgUrl} alt="bg" />
+          {avt ?
+            <img src={avt} alt="img" /> :
+            <IonSkeletonText style={{ height: '250px', width: '100%' }} animated />
+          }
         </NewsDetailBg>
         <NewsDetailTime>
           <IonIcon icon={timeOutline} slot="start" />
-          <span>18/02/2019</span>
+          <span>
+            &nbsp;{formatTime(news?.modified || new Date().toString())}
+          </span>
         </NewsDetailTime>
-        <NewsDetailTitle>
-          Truyền hình Hà Giang: Khánh thành trường mầm non Khuổi Luồn cho trẻ em
-          vùng cao
-        </NewsDetailTitle>
-        <NewsDetailContent>
-          <p>
-            Hà Giang là một trong những tỉnh có tỷ lệ hộ nghèo nhiều nhất cả
-            nước. Trẻ em tại các huyện vùng cao của Hà Giang có cuộc sống khó
-            khăn, việc học hành gặp nhiều thiếu thốn, thậm chí là ước mơ xa vời
-            với nhiều em.
-          </p>
-          <p>
-            Hà Giang là một trong những tỉnh có tỷ lệ hộ nghèo nhiều nhất cả
-            nước. Trẻ em tại các huyện vùng cao của Hà Giang có cuộc sống khó
-            khăn, việc học hành gặp nhiều thiếu thốn, thậm chí là ước mơ xa vời
-            với nhiều em.
-          </p>
-          <p>
-            Hà Giang là một trong những tỉnh có tỷ lệ hộ nghèo nhiều nhất cả
-            nước. Trẻ em tại các huyện vùng cao của Hà Giang có cuộc sống khó
-            khăn, việc học hành gặp nhiều thiếu thốn, thậm chí là ước mơ xa vời
-            với nhiều em.
-          </p>
-          <p>
-            Hà Giang là một trong những tỉnh có tỷ lệ hộ nghèo nhiều nhất cả
-            nước. Trẻ em tại các huyện vùng cao của Hà Giang có cuộc sống khó
-            khăn, việc học hành gặp nhiều thiếu thốn, thậm chí là ước mơ xa vời
-            với nhiều em.
-          </p>
-        </NewsDetailContent>
+        <NewsDetailTitle>{news?.title?.rendered || "N/A"}</NewsDetailTitle>
+        <NewsDetailContent
+          dangerouslySetInnerHTML={{ __html: news?.content?.rendered || "" }}
+        />
       </IonContent>
     </>
   );

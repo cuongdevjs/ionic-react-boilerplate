@@ -11,8 +11,8 @@ export const NewsItemWrapper = styled.div`
     --background: rgba(0, 0, 0, 0);
     --pading-start: 0;
     --ion-safe-area-left: 0;
-    margin-bottom: 7px;
-    margin-top: 5px;
+    margin-bottom: 12px;
+    margin-top: 3px;
     ion-thumbnail {
       --border-radius: 11px;
     }
@@ -31,7 +31,7 @@ export const NewsItemWrapper = styled.div`
       font-size: 14px;
       font-weight: 600;
       line-height: 18.15px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .time {
       ${FlexRowStart};

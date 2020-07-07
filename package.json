@@ -24,6 +24,7 @@
     "antd-mobile": "^2.3.3",
     "axios": "^0.19.2",
     "cross-env": "7.0.2",
+    "date-fns": "^2.14.0",
     "history": "^5.0.0",
     "ionicons": "^5.0.0",
     "node-plop": "0.25.0",

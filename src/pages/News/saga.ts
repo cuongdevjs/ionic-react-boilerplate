@@ -1,8 +1,19 @@
-// import { take, call, put, select, takeLatest } from 'redux-saga/effects';
-// import { actions } from './slice';
+import { put, call, takeLatest } from "redux-saga/effects";
+import { GET_LIST_NEWS_ACTION, actions } from "./slice";
+import { $get } from "utils/axios";
 
-// export function* doSomething() {}
+export function* getListNewsSagas({ payload }) {
+  yield put(GET_LIST_NEWS_ACTION.request());
+  try {
+    const result = yield call($get, "/wp/v2/posts", payload);
+    if (!result.data.length || result.data.length < payload.per_page)
+      yield put(actions.setIsFetchInfinityDone({ isDone: true }));
+    yield put(GET_LIST_NEWS_ACTION.success(result.data));
+  } catch {
+    yield put(GET_LIST_NEWS_ACTION.failure());
+  }
+}
 
 export function* newsSaga() {
-  // yield takeLatest(actions.someAction.type, doSomething);
+  yield takeLatest(GET_LIST_NEWS_ACTION.TRIGGER, getListNewsSagas);
 }
