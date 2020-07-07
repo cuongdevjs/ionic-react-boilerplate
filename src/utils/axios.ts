@@ -46,7 +46,7 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   function(response: AxiosResponse) {
-    store.dispatch(
+    response?.data?.message && store.dispatch(
       ActionApp.showToast({
         messageToast: response.data.message,
         colorToast: response.data.statusCode === 200 ? "success" : "warning",
@@ -57,7 +57,7 @@ _axios.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status) {
-      if (error.response.status !== 200) {
+      if (error.response.status !== 200 && error?.response?.data?.message) {
         store.dispatch(
           ActionApp.showToast({
             messageToast: error.response.data.message,
