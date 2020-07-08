@@ -20,13 +20,12 @@ export const IonReactNav: React.FC<IonReactNavProps> = ({
   const navElRef = React.useRef<HTMLIonNavElement>();
 
   React.useEffect(() => {
-    navElRef?.current?.push("nav-detail");
+    if (data && Object.keys(data).length) navElRef?.current?.push("nav-detail");
   }, [data]);
 
   const onIonNavDidChange = async (navEl: HTMLIonNavElement) => {
     navElRef.current = navEl;
     const rootView = await navEl.getByIndex(0);
-    console.log(rootView)
 
     if (rootView === undefined) {
       const homeEl = navEl.querySelector("#home-wrapper") as HTMLDivElement;
