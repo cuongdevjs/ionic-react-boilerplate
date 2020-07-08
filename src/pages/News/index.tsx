@@ -22,13 +22,14 @@ import {
   useIonViewWillEnter,
   useIonViewWillLeave,
 } from "@ionic/react";
-import { Header, SegmentNewsHighlight, SegmentListNews } from "./components";
-import IonNavStack from "components/IonNavStack/Loadable";
-import NewsDetail from "pages/NewsDetail/Loadable";
-import IonPullRefresh from "components/IonPullRefresh/Loadable";
 import { I_News } from "./types";
+import NewsDetail from "pages/NewsDetail/Loadable";
+import IonNavStack from "components/IonNavStack/Loadable";
+import SkeletonCard from "components/SkeletonCard/Loadable";
+import IonPullRefresh from "components/IonPullRefresh/Loadable";
+import { Header, SegmentNewsHighlight, SegmentListNews } from "./components";
 
-interface Props { }
+interface Props {}
 
 export const News = memo((props: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -88,9 +89,10 @@ export const News = memo((props: Props) => {
     [isFetchInfinityDone, page]
   );
 
-  const onSelectedNews = useCallback((news: I_News) =>
-    setNewsSelected(news)
-    , []);
+  const onSelectedNews = useCallback(
+    (news: I_News) => setNewsSelected(news),
+    []
+  );
 
   return (
     <IonPage>
@@ -102,11 +104,15 @@ export const News = memo((props: Props) => {
         <IonContent fullscreen={true}>
           <IonPullRefresh onRefresh={onRefresh} />
           <NewsContent>
-            {newsHighlight && (
-              <SegmentNewsHighlight
-                news={newsHighlight}
-                onSelectedNews={onSelectedNews}
-              />
+            {!loading ? (
+              newsHighlight && (
+                <SegmentNewsHighlight
+                  news={newsHighlight}
+                  onSelectedNews={onSelectedNews}
+                />
+              )
+            ) : (
+              <SkeletonCard />
             )}
             <SegmentListNews
               loading={loading}

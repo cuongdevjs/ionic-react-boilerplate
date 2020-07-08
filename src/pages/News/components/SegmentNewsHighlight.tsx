@@ -40,7 +40,7 @@ export const SegmentNewsHighlight = React.memo(({ news, onSelectedNews }: Props)
       <IonCard>
         {avt ?
           <img src={avt} alt="img" /> :
-          <IonSkeletonText style={{ height: '250px', width: '100%' }} animated />
+          <IonSkeletonText style={{ height: '250px', width: '100%', marginTop: 0 }} animated />
         }
         <IonCardHeader>
           <IonCardTitle>
