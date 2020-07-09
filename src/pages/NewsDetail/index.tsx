@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from "react";
+import React, { memo } from 'react'
 
 import {
   IonHeader,
@@ -14,32 +14,31 @@ import {
   IonTitle,
   IonContent,
   IonIcon,
-  IonSkeletonText,
-} from "@ionic/react";
+  IonSkeletonText
+} from '@ionic/react'
 import {
   NewsDetailHeader,
   NewsDetailContent,
   NewsDetailBg,
   NewsDetailTime,
-  NewsDetailTitle,
-} from "./styled";
-import bgUrl from "assets/images/bgProfile.png";
-import { arrowBackOutline, timeOutline } from "ionicons/icons";
-import { I_News } from "pages/News/types";
-import { formatTime } from "utils/functionHelper";
-import { $get } from "utils/axios";
+  NewsDetailTitle
+} from './styled'
+import bgUrl from 'assets/images/bgProfile.png'
+import { arrowBackOutline, timeOutline } from 'ionicons/icons'
+import { I_News } from 'pages/News/types'
+import { formatTime } from 'utils/functionHelper'
+import { $get } from 'utils/axios'
 
 interface Props {
-  news: I_News;
+  news: I_News
 }
 
 export const NewsDetail = memo(({ news }: Props) => {
-  const [avt, setAvt] = React.useState("");
+  const [avt, setAvt] = React.useState('')
 
   const getAvt = React.useCallback(async () => {
     try {
-      const data = await $get(`/wp/v2/media/${news?.featured_media || 0}`);
-      console.log(data)
+      const data = await $get(`/wp/v2/media/${news?.featured_media || 0}`)
       setAvt(data?.data?.source_url || bgUrl)
     } catch {
       setAvt(bgUrl)
@@ -47,22 +46,20 @@ export const NewsDetail = memo(({ news }: Props) => {
   }, [news])
 
   React.useEffect(() => {
-    getAvt();
-    return () => {
-      setAvt("")
-    }
-  }, [getAvt, news])
+    setAvt('')
+    getAvt()
+  }, [getAvt])
 
   return (
     <>
       <IonHeader translucent>
         <NewsDetailHeader>
           <IonToolbar>
-            <IonButtons slot="start">
+            <IonButtons slot='start'>
               <IonBackButton
                 icon={arrowBackOutline}
-                text={""}
-                defaultHref="/news"
+                text={''}
+                defaultHref='/news'
               />
             </IonButtons>
             <IonTitle>Chi tiết tin tức</IonTitle>
@@ -71,22 +68,26 @@ export const NewsDetail = memo(({ news }: Props) => {
       </IonHeader>
       <IonContent fullscreen>
         <NewsDetailBg>
-          {avt ?
-            <img src={avt} alt="img" /> :
-            <IonSkeletonText style={{ height: '250px', width: '100%' }} animated />
-          }
+          {avt ? (
+            <img src={avt} alt='img' />
+          ) : (
+            <IonSkeletonText
+              style={{ height: '250px', width: '100%' }}
+              animated
+            />
+          )}
         </NewsDetailBg>
         <NewsDetailTime>
-          <IonIcon icon={timeOutline} slot="start" />
+          <IonIcon icon={timeOutline} slot='start' />
           <span>
             &nbsp;{formatTime(news?.modified || new Date().toString())}
           </span>
         </NewsDetailTime>
-        <NewsDetailTitle>{news?.title?.rendered || "N/A"}</NewsDetailTitle>
+        <NewsDetailTitle>{news?.title?.rendered || 'N/A'}</NewsDetailTitle>
         <NewsDetailContent
-          dangerouslySetInnerHTML={{ __html: news?.content?.rendered || "" }}
+          dangerouslySetInnerHTML={{ __html: news?.content?.rendered || '' }}
         />
       </IonContent>
     </>
-  );
-});
+  )
+})
