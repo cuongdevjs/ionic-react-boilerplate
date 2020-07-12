@@ -111,7 +111,7 @@ export const News = memo(({ history }: Props) => {
     <IonPage>
       <IonNavStack
         data={newsSelected}
-        detail={() => <NewsDetail news={newsSelected} />}
+        detail={<NewsDetail news={newsSelected} />}
       >
         <Header />
         <IonContent fullscreen={true}>

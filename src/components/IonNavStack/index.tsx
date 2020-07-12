@@ -7,7 +7,7 @@ import React from 'react'
 import { IonNav } from '@ionic/react'
 
 interface IonReactNavProps {
-  detail: Function
+  detail: any
   data: any
   chidlren?: React.ReactNode
 }
@@ -15,14 +15,14 @@ interface IonReactNavProps {
 export const IonReactNav: React.FC<IonReactNavProps> = ({
   children,
   detail,
-
   data
 }) => {
   const navElRef = React.useRef<HTMLIonNavElement>()
 
   React.useEffect(() => {
-    if (data && Object.keys(data).length)
+    if (data && Object.keys(data).length) {
       navElRef?.current?.push('nav-detail', data)
+    }
     // return () => {
     //   if (data && Object.keys(data).length) navElRef?.current?.popToRoot()
     // }
@@ -74,7 +74,7 @@ export const IonReactNav: React.FC<IonReactNavProps> = ({
     >
       <div id='home-wrapper'>{children}</div>
       <div id='detail-wrapper' style={{ display: 'none' }}>
-        {detail()}
+        {detail}
       </div>
     </IonNav>
   )
