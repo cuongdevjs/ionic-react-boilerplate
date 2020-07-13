@@ -108,7 +108,7 @@ export const Campaign = memo(({ history }: Props) => {
   )
 
   const onClickCampaignItem = useCallback(
-    (ID: string) => history.replace(`/campaign/${ID}`),
+    (ID: string) => history.push(`/campaign/${ID}`),
     [history]
   )
 
