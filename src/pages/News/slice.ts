@@ -9,10 +9,14 @@ export const initialState: ContainerState = {
 	success: false,
 	error: false,
 	listNews: [],
+	detailNewsSelected: {
+		id: "",
+	},
 	isFetchInfinityDone: false,
 };
 
 export const GET_LIST_NEWS_ACTION = createRoutine("getListNews");
+export const GET_DETAIL_NEWS_ACTION = createRoutine("getDetailNews");
 
 const newsSlice = createSlice({
 	name: "news",
@@ -28,6 +32,7 @@ const newsSlice = createSlice({
 		},
 		resetListNews(state) {
 			state.listNews = initialState.listNews;
+			state.detailNewsSelected = initialState.detailNewsSelected;
 			state.isFetchInfinityDone = initialState.isFetchInfinityDone;
 		},
 	},
@@ -36,7 +41,7 @@ const newsSlice = createSlice({
 			state,
 			action: PayloadAction<payloadGetList>
 		) => {},
-		[GET_LIST_NEWS_ACTION.REQUEST]: (state, action: PayloadAction<any>) => {
+		[GET_LIST_NEWS_ACTION.REQUEST]: (state) => {
 			state.error = false;
 			state.success = false;
 			state.loading = true;
@@ -45,12 +50,42 @@ const newsSlice = createSlice({
 			state,
 			action: PayloadAction<I_News[]>
 		) => {
-			state.listNews = [...state.listNews, ...action.payload];
+			state.listNews = Array.from(
+				new Set(
+					[...state.listNews, ...action.payload].map((item) =>
+						JSON.stringify(item)
+					)
+				)
+			).map((item) => JSON.parse(item));
 			state.error = false;
 			state.success = true;
 			state.loading = false;
 		},
-		[GET_LIST_NEWS_ACTION.FAILURE]: (state, action: PayloadAction<any>) => {
+		[GET_LIST_NEWS_ACTION.FAILURE]: (state) => {
+			state.error = true;
+			state.success = false;
+			state.loading = false;
+		},
+		// get detail news
+		[GET_DETAIL_NEWS_ACTION.TRIGGER]: (
+			state,
+			action: PayloadAction<{ id: string }>
+		) => {},
+		[GET_DETAIL_NEWS_ACTION.REQUEST]: (state) => {
+			state.error = false;
+			state.success = false;
+			state.loading = true;
+		},
+		[GET_DETAIL_NEWS_ACTION.SUCCESS]: (
+			state,
+			action: PayloadAction<I_News>
+		) => {
+			state.detailNewsSelected = action.payload;
+			state.error = false;
+			state.success = true;
+			state.loading = false;
+		},
+		[GET_DETAIL_NEWS_ACTION.FAILURE]: (state) => {
 			state.error = true;
 			state.success = false;
 			state.loading = false;

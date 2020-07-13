@@ -8,6 +8,7 @@ import { I_News } from '../types'
 import SkeletonList from 'components/SkeletonList/Loadable'
 
 interface Props {
+  titleSegment?: string
   loading: boolean
   listNews: I_News[]
   isShowLoadMore: boolean
@@ -19,13 +20,14 @@ export const SegmentListNews = memo(
   ({
     loading,
     listNews,
+    titleSegment,
     isShowLoadMore,
     onSelectedNews,
     onLoadMore
   }: Props) => {
     return (
       <NewsList>
-        <TitleOfSegment title='Tin tức khác ' />
+        <TitleOfSegment title={titleSegment || 'Tin tức khác '} />
         <IonList>
           {loading ? (
             <SkeletonList lengthArray={10} />

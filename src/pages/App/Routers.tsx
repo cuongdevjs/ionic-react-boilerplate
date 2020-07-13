@@ -8,7 +8,7 @@ import HomePage from 'pages/Home/Loadable'
 import ProfilePage from 'pages/Profile/Loadable'
 import LoginPage from 'pages/Login/Loadable'
 import RegisterPage from 'pages/Register/Loadable'
-import NewsPage from 'pages/News/Loadable'
+import NewsPage, { NewsDetailPage } from 'pages/News/Loadable'
 import { useSelector } from 'react-redux'
 import CampaignPage from 'pages/Campaign/Loadable'
 import CampaignDetailPage from 'pages/CampaignDetail/Loadable'
@@ -30,7 +30,7 @@ const RedirectUrl = (location: string, history: History) => {
 export const Routers: React.FC<Props> = ({ history }) => {
   const isLogged = useSelector(selectIsLogged)
 
-  const LIST_PATH_FOR_USER = ['/profile', '/campaign']
+  const LIST_PATH_FOR_USER = ['/profile', '/campaign', '/home', '/news']
   const LIST_PATH_FOR_GUEST = ['/register', '/login']
 
   const routeOnlyUser = React.useCallback(
@@ -59,8 +59,9 @@ export const Routers: React.FC<Props> = ({ history }) => {
 
   return (
     <IonRouterOutlet animated={false}>
-      <Route path='/home' exact component={HomePage} />
-      <Route path='/news' exact component={NewsPage} />
+      <Route path='/home' exact component={routeOnlyUser(HomePage)} />
+      <Route path='/news' exact component={routeOnlyUser(NewsPage)} />
+      <Route path='/news/:id' component={routeOnlyUser(NewsDetailPage)} />
       <Route path='/campaign' exact component={routeOnlyUser(CampaignPage)} />
       <Route
         path='/campaign/:id'
