@@ -5,7 +5,6 @@ import NewsItem from 'components/NewsItem/Loadable'
 import { IonList } from '@ionic/react'
 import IonInfinityScroll from 'components/IonInfinityScroll/Loadable'
 import { I_News } from '../types'
-import SkeletonList from 'components/SkeletonList/Loadable'
 
 interface Props {
   titleSegment?: string
@@ -29,19 +28,17 @@ export const SegmentListNews = memo(
       <NewsList>
         <TitleOfSegment title={titleSegment || 'Tin tức khác '} />
         <IonList>
-          {loading ? (
-            <SkeletonList lengthArray={10} />
-          ) : (
-            listNews.map(news => (
-              <NewsItem
-                key={news.id}
-                news={news}
-                onSelectedNews={onSelectedNews}
-              />
-            ))
-          )}
+          {listNews.map(news => (
+            <NewsItem
+              key={news.id}
+              news={news}
+              onSelectedNews={onSelectedNews}
+            />
+          ))}
         </IonList>
-        {isShowLoadMore && <IonInfinityScroll onLoadMore={onLoadMore} />}
+        {isShowLoadMore && !loading && (
+          <IonInfinityScroll onLoadMore={onLoadMore} />
+        )}
       </NewsList>
     )
   }

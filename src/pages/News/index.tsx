@@ -29,6 +29,7 @@ import SkeletonCard from 'components/SkeletonCard/Loadable'
 import IonPullRefresh from 'components/IonPullRefresh/Loadable'
 import { Header, SegmentNewsHighlight, SegmentListNews } from './components'
 import { RouteComponentProps } from 'react-router'
+import SkeletonList from 'components/SkeletonList/Loadable'
 
 interface Props extends RouteComponentProps {}
 
@@ -117,16 +118,14 @@ export const News = memo(({ history }: Props) => {
         <IonContent fullscreen={true}>
           <IonPullRefresh onRefresh={onRefresh} />
           <NewsContent>
-            {!loading ? (
-              newsHighlight && (
-                <SegmentNewsHighlight
-                  news={newsHighlight}
-                  onSelectedNews={onSelectedNews}
-                />
-              )
-            ) : (
-              <SkeletonCard />
-            )}
+            {!loading
+              ? newsHighlight && (
+                  <SegmentNewsHighlight
+                    news={newsHighlight}
+                    onSelectedNews={onSelectedNews}
+                  />
+                )
+              : !newsHighlight && <SkeletonCard />}
             <SegmentListNews
               loading={loading}
               listNews={listNews}
@@ -134,6 +133,7 @@ export const News = memo(({ history }: Props) => {
               onSelectedNews={onSelectedNews}
               onLoadMore={onLoadMore}
             />
+            {loading && <SkeletonList lengthArray={10} />}
           </NewsContent>
         </IonContent>
       </IonNavStack>
