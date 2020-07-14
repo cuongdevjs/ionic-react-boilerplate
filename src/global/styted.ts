@@ -45,88 +45,94 @@ export const GlobalStyle = createGlobalStyle`
   ion-refresher.refresher-active {
     z-index: 10;
   }
+  .sc-ion-action-sheet-ios-h {
+    --ion-color-primary: rgb(0, 0, 0);
+    .action-sheet-button.sc-ion-action-sheet-ios {
+      font-size: 15px;
+    }
+  }
 `;
 
 export const Flex = css`
-  display: flex;
+	display: flex;
 `;
 
 export const FlexCol = css`
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const FlexRowCenter = css`
-  ${Flex};
-  justify-content: center;
-  align-items: center;
+	${Flex};
+	justify-content: center;
+	align-items: center;
 `;
 
 export const FlexRowStart = css`
-  ${Flex};
-  justify-content: flex-start;
-  align-items: center;
+	${Flex};
+	justify-content: flex-start;
+	align-items: center;
 `;
 
 export const FlexRowEnd = css`
-  ${Flex};
-  justify-content: flex-end;
-  align-items: center;
+	${Flex};
+	justify-content: flex-end;
+	align-items: center;
 `;
 
 export const FlexRowBetween = css`
-  ${Flex}
-  justify-content: space-between;
-  align-items: center;
+	${Flex}
+	justify-content: space-between;
+	align-items: center;
 `;
 
 export const FlexColCenter = css`
-  ${FlexCol};
-  ${FlexRowCenter}
+	${FlexCol};
+	${FlexRowCenter}
 `;
 
 export const FlexColStart = css`
-  ${FlexCol};
-  justify-content: center;
-  align-items: flex-start;
+	${FlexCol};
+	justify-content: center;
+	align-items: flex-start;
 `;
 
 export const FlexColEnd = css`
-  ${FlexCol};
-  justify-content: center;
-  align-items: flex-end;
+	${FlexCol};
+	justify-content: center;
+	align-items: flex-end;
 `;
 
 export const FlexColBetween = css`
-  ${Flex}
-  justify-content: center;
-  align-items: baseline;
+	${Flex}
+	justify-content: center;
+	align-items: baseline;
 `;
 
 export const BackgroundCover = css<{ bgUrl: string | null | undefined }>`
-  background-image: url(${(props) => props.bgUrl && props.bgUrl});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+	background-image: url(${(props) => props.bgUrl && props.bgUrl});
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 `;
 
 export const BackgroundContain = css`
-  ${BackgroundCover};
-  background-size: contain;
+	${BackgroundCover};
+	background-size: contain;
 `;
 
 export const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  ${FlexRowCenter};
+	width: 100%;
+	height: 100%;
+	${FlexRowCenter};
 `;
 
 export const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 1;
 `;

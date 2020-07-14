@@ -12,6 +12,7 @@ import NewsPage, { NewsDetailPage } from 'pages/News/Loadable'
 import { useSelector } from 'react-redux'
 import CampaignPage from 'pages/Campaign/Loadable'
 import CampaignDetailPage from 'pages/CampaignDetail/Loadable'
+import CampaignCreatePage from 'pages/CampaignCreate/Loadable'
 
 interface Props extends RouteComponentProps {}
 
@@ -63,6 +64,11 @@ export const Routers: React.FC<Props> = ({ history }) => {
       <Route path='/news' exact component={routeOnlyUser(NewsPage)} />
       <Route path='/news/:id' component={routeOnlyUser(NewsDetailPage)} />
       <Route path='/campaign' exact component={routeOnlyUser(CampaignPage)} />
+      <Route
+        path='/campaign/create'
+        exact
+        component={routeOnlyUser(CampaignCreatePage)}
+      />
       <Route
         path='/campaign/:id'
         component={routeOnlyUser(CampaignDetailPage)}

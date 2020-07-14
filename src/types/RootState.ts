@@ -6,6 +6,7 @@ import { ProfileState } from 'pages/Profile/types';
 import { NewsState } from 'pages/News/types';
 import { CampaignState } from 'pages/Campaign/types';
 import { CampaignDetailState } from 'pages/CampaignDetail/types';
+import { CampaignCreateState } from 'pages/CampaignCreate/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 /*
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
@@ -22,5 +23,6 @@ export interface RootState {
   news?: NewsState;
   campaign?: CampaignState;
   campaignDetail?: CampaignDetailState;
+  campaignCreate?: CampaignCreateState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

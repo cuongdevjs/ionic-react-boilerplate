@@ -4,7 +4,7 @@
  *
  */
 import styled, { css } from 'styled-components'
-import { NewsDetailHeader } from 'pages/NewsDetail/styled'
+import { NewsHeader } from 'pages/News/styled'
 import {
   FlexCol,
   FlexRowBetween,
@@ -13,7 +13,7 @@ import {
 } from 'global/styted'
 import { CampaignsNewest } from 'pages/Campaign/styled'
 
-export const CampaignDetailHeader = styled(NewsDetailHeader)``
+export const CampaignDetailHeader = styled(NewsHeader)``
 export const CampaignDetailSlides = styled(CampaignsNewest)``
 
 export const CampaignDetailMain = styled.div`
