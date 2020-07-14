@@ -4,6 +4,13 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
+  "server": {
+    "hostname": "yoolove.starfruit.com.vn/wp-json",
+    "androidScheme": "https",
+    "allowNavigation": [
+      "yoolove.starfruit.com.vn/wp-json"
+    ]
+  },
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0

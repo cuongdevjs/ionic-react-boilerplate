@@ -1,0 +1,10 @@
+/home
+/news
+/news/:id
+/campaign
+/campaign/create
+/campaign/:id
+/login
+/register
+/profile
+/
