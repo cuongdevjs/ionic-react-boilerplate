@@ -3,48 +3,25 @@
  * styled Profile
  *
  */
-import styled from "styled-components";
-import { FlexRowCenter } from "global/styted";
+import styled from 'styled-components'
+import { FlexRowCenter } from 'global/styted'
+import { NewsHeader, NewsContent } from 'pages/News/styled'
 
-
-export const ProfileHeader = styled.div`
-    ion-toolbar {
-      --padding-start: 16px;
-      --padding-end: 16px;
-      ion-title {
-        font-size: 15px;
-        color: #4c4c4c;
-      }
-      ion-menu-button {
-        color: #bbb;
-        font-size: 21px;
-        --padding-start: 0;
-        --padding-end: 0;
-        height: 21px;
-        width: 21px;
-      }
-      ion-buttons {
-        ion-icon {
-          color: #bbb;
-          font-size: 17px;
-        }
-      }
-    }
-`;
+export const ProfileHeader = styled(NewsHeader)``
 
 export const ProfileContent = styled.div`
   width: 100%;
   height: 100%;
-`;
+`
 
 export const ProfileContentAvt = styled.div`
   position: relative;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   ion-avatar {
     position: absolute;
     width: 64px;
     height: 64px;
-    top: 64px;
+    top: 72px;
     left: 16px;
     border: 6px solid rgb(255, 255, 255);
     span {
@@ -62,11 +39,9 @@ export const ProfileContentAvt = styled.div`
       }
     }
   }
-`;
+`
 
-export const ProfileContentGroups = styled.div`
-  padding: 0 20px 24px;
-`;
+export const ProfileContentGroups = styled(NewsContent)``
 
 export const ProfileContentGroupItem = styled.div`
   margin-bottom: 24px;
@@ -105,7 +80,7 @@ export const ProfileContentGroupItem = styled.div`
       }
     }
   }
-`;
+`
 
 export const ProfileContentSubmit = styled.div`
   ${FlexRowCenter};
@@ -123,6 +98,6 @@ export const ProfileContentSubmit = styled.div`
     --padding-end: 3.1em;
     font-size: 12px;
   }
-`;
+`
 
-export const ProfileFooter = styled.div``;
+export const ProfileFooter = styled.div``

@@ -3,8 +3,8 @@
  * styled News
  *
  */
-import styled from "styled-components";
-import { FlexRowStart } from "global/styted";
+import styled from 'styled-components'
+import { FlexRowStart } from 'global/styted'
 
 export const NewsHeader = styled.div`
   ion-toolbar {
@@ -14,13 +14,18 @@ export const NewsHeader = styled.div`
       font-size: 15px;
       color: #4c4c4c;
     }
-    ion-menu-button {
+    ion-menu-button,
+    ion-back-button {
       color: #bbb;
       font-size: 21px;
       --padding-start: 0;
       --padding-end: 0;
       height: 21px;
       width: 21px;
+      min-width: 21px;
+    }
+    ion-back-button {
+      font-size: 12px;
     }
     ion-buttons {
       ion-icon {
@@ -29,12 +34,12 @@ export const NewsHeader = styled.div`
       }
     }
   }
-`;
+`
 
 export const NewsContent = styled.div`
   width: 100%;
   padding: 12px 20px 24px;
-`;
+`
 
 export const NewsHighlight = styled.div`
   ion-card {
@@ -65,8 +70,8 @@ export const NewsHighlight = styled.div`
       color: #878787;
     }
   }
-`;
+`
 
 export const NewsList = styled.div`
   padding-bottom: 20px;
-`;
+`

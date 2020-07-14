@@ -4,9 +4,10 @@
  *
  */
 import styled from 'styled-components'
-import { CampaignCreateBtn, CampaignHeader } from 'pages/Campaign/styled'
+import { NewsHeader, NewsContent } from 'pages/News/styled'
+import { CampaignCreateBtn } from 'pages/Campaign/styled'
 
-export const HomeHeader = styled(CampaignHeader)`
+export const HomeHeader = styled(NewsHeader)`
   ion-toolbar {
     --ion-toolbar-background: rgba(0, 0, 0, 0.5);
     --color: rgb(255, 255, 255);
@@ -19,7 +20,7 @@ export const HomeHeader = styled(CampaignHeader)`
   }
 `
 
-export const HomeContent = styled.div`
+export const HomeContent = styled(NewsContent)`
   padding: 20px;
 `
 
