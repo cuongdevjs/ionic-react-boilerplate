@@ -73,5 +73,6 @@ export const NewsHighlight = styled.div`
 `
 
 export const NewsList = styled.div`
+  padding-top: 20px;
   padding-bottom: 20px;
 `

@@ -41,9 +41,7 @@ export const SegmentListNews = memo(
             ))
           )}
         </IonList>
-        {isShowLoadMore && !loading && (
-          <IonInfinityScroll onLoadMore={onLoadMore} />
-        )}
+        {isShowLoadMore && <IonInfinityScroll onLoadMore={onLoadMore} />}
       </NewsList>
     )
   }

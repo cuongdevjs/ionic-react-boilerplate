@@ -11,6 +11,7 @@ export function* getListNewsSagas({ payload }) {
 		yield put(GET_LIST_NEWS_ACTION.success(result.data));
 	} catch {
 		yield put(GET_LIST_NEWS_ACTION.failure());
+		yield put(actions.setIsFetchInfinityDone({ isDone: true }));
 	}
 }
 
