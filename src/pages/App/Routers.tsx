@@ -37,8 +37,9 @@ export const Routers: React.FC<Props> = ({ history }) => {
   const routeOnlyUser = React.useCallback(
     comp => {
       return !isLogged &&
-        !!LIST_PATH_FOR_USER.filter(item => item === history.location.pathname)
-          .length
+        !!LIST_PATH_FOR_USER.filter(item =>
+          history.location.pathname.includes(item)
+        ).length
         ? RedirectUrl('/login', history)
         : comp
     },
@@ -49,8 +50,9 @@ export const Routers: React.FC<Props> = ({ history }) => {
   const routeOnlyGuest = React.useCallback(
     comp => {
       return isLogged &&
-        !!LIST_PATH_FOR_GUEST.filter(item => item === history.location.pathname)
-          .length
+        !!LIST_PATH_FOR_GUEST.filter(item =>
+          history.location.pathname.includes(item)
+        ).length
         ? RedirectUrl('/home', history)
         : comp
     },
