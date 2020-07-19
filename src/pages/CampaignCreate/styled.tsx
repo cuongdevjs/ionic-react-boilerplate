@@ -68,32 +68,54 @@ export const UploadFileContainer = styled.div`
 
 export const SegmentInfoCampaign = styled.div`
   margin-bottom: 32px;
+  ion-thumbnail {
+    --border-radius: 8px;
+    width: 64px;
+    height: 64px;
+    border: 2px solid rgb(255, 255, 255);
+    margin-bottom: 6px;
+    box-shadow: 2px -1px 12px 0 rgba(0, 0, 0, 0.1);
+  }
 `
 
-export const SegmentInfoRepresentative = styled.div``
+export const SegmentInfoRepresentative = styled.div`
+  ion-avatar {
+    width: 48px;
+    height: 48px;
+    border: 2px solid rgb(255, 255, 255);
+    margin-bottom: 6px;
+    box-shadow: 5px 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+`
 
 export const CampaignCreateFooter = styled.div`
-  ion-button {
-    font-size: 13px;
-    text-transform: uppercase;
-    --border-radius: 24px;
-    --color: rgb(255, 255, 255);
-    &.btnCancel {
-      --padding-start: 24px;
-      --padding-end: 24px;
-      --background: rgb(188, 188, 188);
-      --background-activated: rgb(188, 188, 188);
-      --background-focused: rgb(188, 188, 188);
-      --background-hover: rgb(188, 188, 188);
-    }
-    &.btnSubmit {
-      --padding-start: 48px;
-      --padding-end: 48px;
-      --background: #36b5ad;
-      --background-activated: #36b5ad;
-      --background-focused: #36b5ad;
-      --background-hover: #36b5ad;
-      --box-shadow: 0 8px 18px 0 rgba(54, 181, 173, 0.27);
+  ion-toolbar {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 5px;
+    --padding-botom: 5px;
+    ion-button {
+      font-size: 13px;
+      text-transform: uppercase;
+      --border-radius: 24px;
+      --color: rgb(255, 255, 255);
+      &.btnCancel {
+        --padding-start: 24px;
+        --padding-end: 24px;
+        --background: rgb(188, 188, 188);
+        --background-activated: rgb(188, 188, 188);
+        --background-focused: rgb(188, 188, 188);
+        --background-hover: rgb(188, 188, 188);
+      }
+      &.btnSubmit {
+        --padding-start: 48px;
+        --padding-end: 48px;
+        --background: #36b5ad;
+        --background-activated: #36b5ad;
+        --background-focused: #36b5ad;
+        --background-hover: #36b5ad;
+        --box-shadow: 0 8px 18px 0 rgba(54, 181, 173, 0.27);
+      }
     }
   }
 `

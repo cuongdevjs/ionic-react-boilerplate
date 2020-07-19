@@ -4,38 +4,24 @@
  *
  */
 
-import React, { memo } from 'react'
+import React, { memo, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors'
-import { reducer, sliceKey } from './slice'
-import { selectCampaignCreate } from './selectors'
+import { reducer, sliceKey, CREATE_CAMPAIGN_ACTION, actions } from './slice'
+import { selectLoading, selectSuccess } from './selectors'
 import { campaignCreateSaga } from './saga'
+import { CampaignCreateContent } from './styled'
+import { IonPage, IonContent } from '@ionic/react'
 import {
-  CampaignCreateContent,
+  Header,
+  Footer,
   SegmentInfoCampaign,
-  FormCampaignCreate,
-  SegmentInfoRepresentative,
-  UploadFileContainer
-} from './styled'
-import {
-  IonPage,
-  IonContent,
-  IonItem,
-  IonLabel,
-  IonInput,
-  IonDatetime,
-  IonTextarea,
-  IonRow,
-  IonCol,
-  IonSelect,
-  IonSelectOption,
-  IonGrid,
-  IonIcon
-} from '@ionic/react'
-import { Header, Footer } from './components'
-import TitleOfSegment from 'components/TitleOfSegment/Loadable'
-import { cloudUploadOutline } from 'ionicons/icons'
+  SegmentInfoRepresentative
+} from './components'
+import { I_FormCreatCampaign } from './types'
+import { INIT_FORM_CAMPAIGN } from './constants'
+import { ChooserResult } from '@ionic-native/chooser'
 
 interface Props {}
 
@@ -43,147 +29,72 @@ export const CampaignCreate = memo((props: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer })
   useInjectSaga({ key: sliceKey, saga: campaignCreateSaga })
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const campaignCreate = useSelector(selectCampaignCreate)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const loading = useSelector(selectLoading)
+  const success = useSelector(selectSuccess)
   const dispatch = useDispatch()
+  const btnSubmitRef = useRef<HTMLButtonElement>(null!)
+  const [form, setForm] = React.useState<I_FormCreatCampaign>(
+    INIT_FORM_CAMPAIGN
+  )
+
+  const onChangeData = useCallback(
+    (key, value) =>
+      setForm(prevValue => ({ ...prevValue, ...{ [key]: value } })),
+    []
+  )
+
+  const onUploadImage = useCallback(
+    (key: string, file: ChooserResult) =>
+      setForm(prevValue => ({ ...prevValue, ...{ [key]: file.dataURI } })),
+    []
+  )
+
+  const onResetForm = useCallback(() => setForm(INIT_FORM_CAMPAIGN), [])
+
+  const onClickSubmit = useCallback(() => btnSubmitRef?.current?.click(), [])
+
+  const onSubmit = useCallback(
+    e => {
+      dispatch(CREATE_CAMPAIGN_ACTION(form))
+      e.preventDefault()
+    },
+    [dispatch, form]
+  )
+
+  React.useEffect(() => {
+    if (!loading && success) {
+      onResetForm()
+      dispatch(actions.resetStatusPage())
+    }
+  }, [loading, success, onResetForm, dispatch])
 
   return (
     <IonPage>
       <Header />
       <IonContent fullscreen={true} forceOverscroll={true}>
         <CampaignCreateContent>
-          <SegmentInfoCampaign>
-            <TitleOfSegment title='Thông tin chiến dịch' />
-            <FormCampaignCreate>
-              <UploadFileContainer>
-                <IonIcon icon={cloudUploadOutline} />
-              </UploadFileContainer>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Tên chiến dịch</IonLabel>
-                <IonInput
-                  // onInput={_onChangeAddress}
-                  // value={address}
-                  type='text'
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Mục tiêu quyên góp</IonLabel>
-                <IonInput
-                  // onInput={_onChangePhone}
-                  // value={phone}
-                  type='number'
-                  inputmode='numeric'
-                />
-              </IonItem>
-              <IonGrid className='ion-no-padding'>
-                <IonRow>
-                  <IonCol className='ion-padding-end'>
-                    <IonItem lines='none'>
-                      <IonLabel position='stacked'>Mức độ khó khăn</IonLabel>
-                      <IonSelect
-                        okText='Okay'
-                        cancelText='Dismiss'
-                        interface='action-sheet'
-                        // onInput={_onChangeAddress}
-                        // value={address}
-                      >
-                        <IonSelectOption value='brown'>Brown</IonSelectOption>
-                        <IonSelectOption value='blonde'>Blonde</IonSelectOption>
-                        <IonSelectOption value='black'>Black</IonSelectOption>
-                        <IonSelectOption value='red'>Red</IonSelectOption>
-                      </IonSelect>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol className='ion-padding-start'>
-                    <IonItem lines='none'>
-                      <IonLabel position='stacked'>Loại chiến dịch</IonLabel>
-                      <IonSelect
-                        okText='Okay'
-                        cancelText='Dismiss'
-                        interface='action-sheet'
-                        // onInput={_onChangeAddress}
-                        // value={address}
-                      >
-                        <IonSelectOption value='brown'>Brown</IonSelectOption>
-                        <IonSelectOption value='blonde'>Blonde</IonSelectOption>
-                        <IonSelectOption value='black'>Black</IonSelectOption>
-                        <IonSelectOption value='red'>Red</IonSelectOption>
-                      </IonSelect>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Ngày hết hạn chiến dịch</IonLabel>
-                <IonDatetime
-                  displayFormat='DD/MM/YYYY'
-                  pickerFormat='DD/MM/YYYY'
-                  // value={birthday}
-                  // onIonChange={_onChangeBirthday}
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Mô tả ngắn</IonLabel>
-                <IonTextarea
-                  autoGrow
-                  rows={6}
-                  cols={20}
-                  placeholder='Enter any notes here...'
-                />
-              </IonItem>
-            </FormCampaignCreate>
-          </SegmentInfoCampaign>
-          <SegmentInfoRepresentative>
-            <TitleOfSegment title='Thông tin người đại diện' />
-            <FormCampaignCreate>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Tên</IonLabel>
-                <IonInput
-                  // onInput={_onChangeLastName}
-                  // value={lastName}
-                  type='text'
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Email</IonLabel>
-                <IonInput
-                  // onInput={_onChangeFirstName}
-                  // value={firstName}
-                  type='text'
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>SĐT</IonLabel>
-                <IonInput
-                  // onInput={_onChangePhone}
-                  // value={phone}
-                  type='number'
-                  inputmode='numeric'
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Địa chỉ</IonLabel>
-                <IonInput
-                  // onInput={_onChangeAddress}
-                  // value={address}
-                  type='text'
-                />
-              </IonItem>
-              <IonItem lines='none'>
-                <IonLabel position='stacked'>Ngày sinh</IonLabel>
-                <IonDatetime
-                  displayFormat='DD/MM/YYYY'
-                  pickerFormat='DD/MM/YYYY'
-                  // value={birthday}
-                  // onIonChange={_onChangeBirthday}
-                />
-              </IonItem>
-            </FormCampaignCreate>
-          </SegmentInfoRepresentative>
+          <form onSubmit={onSubmit}>
+            <SegmentInfoCampaign
+              {...form}
+              onChangeData={onChangeData}
+              onUploadImage={onUploadImage}
+            />
+            <SegmentInfoRepresentative
+              {...form}
+              onChangeData={onChangeData}
+              onUploadImage={onUploadImage}
+            />
+            <button ref={btnSubmitRef} type='submit' className='ion-hide'>
+              Lưu
+            </button>
+          </form>
         </CampaignCreateContent>
       </IonContent>
-      <Footer />
+      <Footer
+        loading={loading}
+        onReset={onResetForm}
+        onSubmit={onClickSubmit}
+      />
     </IonPage>
   )
 })
