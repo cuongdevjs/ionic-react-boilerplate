@@ -29,6 +29,15 @@ export const GlobalStyle = createGlobalStyle`
   .cursorPointer {
     cursor: pointer !important;
   }
+  ion-fab-button {
+    --background: rgb(255, 255, 255);
+    --background-activated: rgb(255, 255, 255);
+    --background-focused: rgb(255, 255, 255);
+    --background-hover: rgb(255, 255, 255);
+    --color: rgb(0, 0, 0);
+    border: 1px solid rgb(241, 241, 241);
+    border-radius: 100%;
+  }
   ion-picker {
     --ion-color-primary: #414141;
     .picker-opt {

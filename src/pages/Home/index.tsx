@@ -51,6 +51,7 @@ import {
 interface Props extends RouteComponentProps {}
 
 export const Home: React.FC<Props> = ({ history }: Props) => {
+  // inject reducer & saga news, campaign, ifself
   useInjectReducer({ key: sliceKey, reducer: reducer })
   useInjectSaga({ key: sliceKey, saga: homeSaga })
   useInjectReducer({ key: sliceKeyNews, reducer: newsReducer })
@@ -58,10 +59,10 @@ export const Home: React.FC<Props> = ({ history }: Props) => {
   useInjectReducer({ key: sliceKeyCampaign, reducer: campaignReducer })
   useInjectSaga({ key: sliceKeyCampaign, saga: campaignSaga })
   const dispatch = useDispatch()
-  const listCampaign = useSelector(selectListCampaign)
   const listNews = useSelector(selectListNews)
-  const loadingCampaign = useSelector(selectLoadingCampaign)
   const loadingNews = useSelector(selectLoadingNews)
+  const listCampaign = useSelector(selectListCampaign)
+  const loadingCampaign = useSelector(selectLoadingCampaign)
 
   const onResetData = useCallback(() => {
     // reset campaign reducer
@@ -112,21 +113,29 @@ export const Home: React.FC<Props> = ({ history }: Props) => {
     [listCampaign]
   )
 
-  const onClickCampaignItem = useCallback(
-    (ID: string) => history.push(`/campaign/${ID}`),
+  const onRedirectToNewsDetailPage = useCallback(
+    data => history.push(`/news/${data.id}`),
     [history]
   )
 
-  const onSelectedNews = useCallback(data => history.push(`/news/${data.id}`), [
+  const onRedirectToNewsPage = useCallback(() => history.push('/news'), [
     history
   ])
 
-  const onLoadMore = useCallback(() => {}, [])
+  const onRedirectToCampaignPage = useCallback(
+    () => history.push('/campaign'),
+    [history]
+  )
 
-  const onWatchAllCampaign = useCallback(() => history.push('/campaign'), [
-    history
-  ])
-  const onWatchAllNews = useCallback(() => history.push('/news'), [history])
+  const onRedirectToCampaignCreatePage = useCallback(
+    () => history.push('/campaign/create'),
+    [history]
+  )
+
+  const onRedirectToCampaignDetailPage = useCallback(
+    (ID: string) => history.push(`/campaign/${ID}`),
+    [history]
+  )
 
   return (
     <IonPage>
@@ -139,16 +148,16 @@ export const Home: React.FC<Props> = ({ history }: Props) => {
             <SegmentNewestCampaigns
               loading={loading}
               listCampaignNewest={listCampaignNewest}
-              onClick={onClickCampaignItem}
+              onClick={onRedirectToCampaignDetailPage}
             />
-            <SegmentBtnWatchAll onClick={onWatchAllCampaign} />
           </SegmentCampaignsNewest>
           <SegmentMyCampaigns>
             <SegmentListCampaign
               loading={loading}
               listCampaignOther={listCampaignOther}
-              onClick={onClickCampaignItem}
+              onClick={onRedirectToCampaignDetailPage}
             />
+            <SegmentBtnWatchAll onClick={onRedirectToCampaignPage} />
           </SegmentMyCampaigns>
           {/* news */}
           <SegmentNews>
@@ -156,14 +165,13 @@ export const Home: React.FC<Props> = ({ history }: Props) => {
               listNews={listNews}
               loading={loading}
               isShowLoadMore={false}
-              onSelectedNews={onSelectedNews}
-              onLoadMore={onLoadMore}
+              onSelectedNews={onRedirectToNewsDetailPage}
+              onLoadMore={() => {}}
             />
-            <SegmentBtnWatchAll onClick={onWatchAllNews} />
+            <SegmentBtnWatchAll onClick={onRedirectToNewsPage} />
           </SegmentNews>
-          {/* btnCreate */}
-          <SegmentBtnCreate />
         </HomeContent>
+        <SegmentBtnCreate onClick={onRedirectToCampaignCreatePage} />
       </IonContent>
     </IonPage>
   )

@@ -1,16 +1,23 @@
 import React, { memo } from 'react'
-import { SegmentBtnCreate } from '../styled'
-import { IonFabButton, IonIcon } from '@ionic/react'
+// import { SegmentBtnCreate } from '../styled'
+import { IonFabButton, IonIcon, IonFab } from '@ionic/react'
 import { add } from 'ionicons/icons'
 
-interface Props {}
+interface Props {
+  onClick: () => void
+}
 
-export const SegmentCreateCampaign = memo((props: Props) => {
+export const SegmentCreateCampaign = memo(({ onClick }: Props) => {
   return (
-    <SegmentBtnCreate>
+    <IonFab
+      vertical='bottom'
+      horizontal='center'
+      slot='fixed'
+      onClick={onClick}
+    >
       <IonFabButton>
         <IonIcon icon={add} />
       </IonFabButton>
-    </SegmentBtnCreate>
+    </IonFab>
   )
 })

@@ -4,7 +4,7 @@
  *
  */
 import styled from 'styled-components'
-import { NewsHeader, NewsContent } from 'pages/News/styled'
+import { NewsHeader, NewsContent, NewsList } from 'pages/News/styled'
 import { CampaignCreateBtn } from 'pages/Campaign/styled'
 
 export const HomeHeader = styled(NewsHeader)`
@@ -21,7 +21,7 @@ export const HomeHeader = styled(NewsHeader)`
 `
 
 export const HomeContent = styled(NewsContent)`
-  padding: 20px;
+  padding-bottom: 72px;
 `
 
 export const HomeContentBg = styled.div<{ bgUrl: string }>`
@@ -35,7 +35,11 @@ export const SegmentCampaignsNewest = styled.div``
 
 export const SegmentMyCampaigns = styled.div``
 
-export const SegmentNews = styled.div``
+export const SegmentNews = styled.div`
+  ${NewsList} {
+    padding-bottom: 0;
+  }
+`
 
 export const SegmentBtnWatchAll = styled.div`
   ion-button {
