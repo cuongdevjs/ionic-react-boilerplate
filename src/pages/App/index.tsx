@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonApp, IonRouterOutlet, IonToast } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
-
+import '@codetrix-studio/capacitor-google-auth'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
 

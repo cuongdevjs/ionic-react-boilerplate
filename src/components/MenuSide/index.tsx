@@ -12,6 +12,7 @@ import { I_InfoMySelf } from 'pages/App/types'
 import { Header, Footer, MenuItem } from './components'
 import { LIST_MENU_ITEM } from './constanst'
 import { useHistory } from 'react-router'
+import { Plugins } from '@capacitor/core'
 
 interface Props {
   isLogged: boolean
@@ -30,9 +31,11 @@ export const MenuSide = memo((props: Props) => {
     [history]
   )
 
-  const _onLogout = React.useCallback(() => {
+  const _onLogout = React.useCallback(async () => {
     const logout = props.logout
     logout()
+    await Plugins.FacebookLogin.logout()
+    await Plugins.GoogleAuth.signOut()
     _onNavigation('/login')
   }, [_onNavigation, props.logout])
 

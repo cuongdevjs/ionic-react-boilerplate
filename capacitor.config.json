@@ -7,11 +7,20 @@
   "server": {
     "hostname": "yoolove.starfruit.com.vn/wp-json",
     "androidScheme": "https",
+    "iosScheme": "https",
     "allowNavigation": [
-      "yoolove.starfruit.com.vn/wp-json"
+      "yoolove.starfruit.com.vn/wp-json",
+      "yoolove.starfruit.com.vn/*"
     ]
   },
   "plugins": {
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "serverClientId": "142305466831-knfqvak3jibrqupnlbrvk3f9fem5jane.apps.googleusercontent.com"
+    },
     "SplashScreen": {
       "launchShowDuration": 0
     }
