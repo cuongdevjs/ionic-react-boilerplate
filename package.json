@@ -14,7 +14,7 @@
     "@ionic-native/social-sharing": "^5.27.0",
     "@ionic/pwa-elements": "^1.5.2",
     "@ionic/react": "^5.0.7",
-    "@ionic/react-router": "^5.0.7",
+    "@ionic/react-router": "^5.3.2",
     "@rdlabo/capacitor-facebook-login": "^2.0.3",
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
