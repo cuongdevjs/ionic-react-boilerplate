@@ -48,7 +48,7 @@
     "redux-injectors": "^1.3.0",
     "redux-saga": "^1.1.3",
     "redux-saga-routines": "^3.2.3",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "styled-components": "^5.1.1",
     "ts-node": "8.8.2",
     "typescript": "3.8.3"
